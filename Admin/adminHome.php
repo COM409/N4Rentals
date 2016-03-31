@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+
+<?php include '../database/db_connect.php';
+session_start();
+
+$AdminID = $_GET['AdminID'];
+$adminquery = "SELECT * FROM admin WHERE id = ".$AdminID;
+$result = $conn->query($adminquery);
+
+
+?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -38,9 +49,12 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="../Customer/customerLogin.html">Customer Login</a></li>
+                <li><a href="adminHome.php">Admin Home</a></li>
+                <li><a href="addProd.php">Add Product</a></li>
+                <li><a href="prodUpdate.php">Manage Products</a></li>
+                <li><a href="custManage.php">Manage Customers</a></li>
                 <li class="divider"></li>
-                <li><a href="adminLogin.html">Admin Login</a></li>
+                <li><a href="logoutfile.php">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -52,63 +66,53 @@
 	<div class="container">
 		<div class="bs-docs-section">
 			
-			<div class="row">
-			  <div class="col-lg-12">
+			<?php
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					?> 
+					
+		<div class="row">
+			<div class="col-lg-12">
 				<div class="page-header">
-				  <h1 id="forms">Administrator Login:</h1>
+				  <h1 id="forms"><b>Administrator:</b> <?php echo $row["username"];?></h1>
 				</div>
-			  </div>
-			</div>
-			
-			<div class="row">
-				<div class="col-lg-12 col-md-12">
-				
-					<div class="col-lg-3 col-md-3">
-					</div>
-					
-					<div class="col-lg-5 col-md-5">
-						<div class="well bs-component">
-							<form action="login_check.php" method="POST" class="form-horizontal">
-								<h4>Enter your Admin username and password to login:</h4>
-								<fieldset>
-									<div class="form-group">
-										<label for="inputAdminUname" class="col-lg-2 control-label">Username:</label>
-										<div class="col-lg-10">
-											<input type="text" class="form-control" name="adminUsername" placeholder="Admin Username">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputPassword" class="col-lg-2 control-label">Password:</label>
-										<div class="col-lg-10">
-											<input type="password" class="form-control" name="adminPassword" placeholder="Password">
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-lg-10 col-lg-offset-2" align="right">
-											<button type="submit" class="btn btn-primary">Login</button>
-										</div>
-									</div>
-								</fieldset>
-							</form>
-						</div>
-					</div>
-					
-					<div class="col-lg-3 col-md-3">
-					</div>
-					
-				</div>
-			</div>
+			 </div>
 		</div>
 		
-		<footer>
-        <div class="row">
-          <div class="col-lg-md">
-            <p align="center">&copy; 2016 COM409 Group 3</p>
-          </div>
-        </div>
-      </footer> 	  
-	</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="col-lg-12 col-md-12">
+					<div class="well bs-component">
+					<h3><p align="justify">As an Admin to N4Rentals, you can perform administration tasks. Click an option below:</p></h3><br>
+					
+					<h3 align="center"><a href="addProd.php">Add Product</a></h3>
+					<h3 align="center"><a href="prodUpdate.php">Product Management</a></h3>
+					<h3 align="center"><a href="custManage.php">Customer Management</a></h3><br>
+					<h3 align="center"><a href="logoutfile.php">Logout</a></h3>
 
+					</div>
+				</div>
+			</div>
+        </div>
+		
+		
+			<?php
+						}
+						} else{
+							echo "0 results";}
+							$conn->close();?>
+			
+
+		</div>
+		<footer>
+			<div class="row">
+			  <div class="col-lg-md">
+				<p align="center">&copy; 2016 COM409 Group 3</p>
+			  </div>
+			</div>
+		</footer> 	  
+	</div>
+	
     <script src="../jquery/n4.min.js"></script>
     <script src="../jquery/n4_1.min.js"></script>
     

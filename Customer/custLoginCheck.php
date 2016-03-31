@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+<?php
+session_start();
+include '../database/db_connect.php';
+
+$sql = "SELECT * FROM Customer";
+$result = $conn->query($sql);
+
+$username = $_POST["custEmail"];
+$password = $_POST["custPassword"];
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+		 $dbUsername=$row["email"];
+		 $dbPassword=$row["pword"];
+		 $CustomerID=$row["id"];
+		 
+		if ($dbUsername == $username && $dbPassword == $password){
+			$_SESSION['login'];
+			header("Location: CustHome.php?id=$CustomerID ");			 
+		}	 
+	}
+}	 
+$conn->close();
+
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -38,16 +62,16 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="customerLogin.html">Customer Login</a></li>
+                <li><a href="../Customer/customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
-                <li><a href="../Admin/adminLogin.html">Admin Login</a></li>
+                <li><a href="AdminLogin.php">Admin Login</a></li>
               </ul>
             </li>
           </ul>
         </div>
       </div>
     </div>
-	<br><br><br>
+	<br><br><br><br><br><br>
 	
 	<div class="container">
 		<div class="bs-docs-section">
@@ -55,90 +79,30 @@
 			<div class="row">
 			  <div class="col-lg-12">
 				<div class="page-header">
-				  <h1 id="forms">My Account: Rental History</h1>
+				  <h1 align="center"> Incorrect Login! Please go <a href="customerLogin.php"><u>back</u></a> and enter correct login details. </h1>
 				</div>
 			  </div>
 			</div>
-			
+
 			<div class="row">
 			  <div class="col-lg-12">
 				<div class="page-header">
-				  <p align="justify">View your rental history below listing the products you’ve rented in the past. To rent any of these products again, simply click ‘Book’!</p>
+				  <h1 align="center">If you've forgotten your username/password please <a href="forgottenpassword.php"></u>click here</u></a>.</h1>
 				</div>
 			  </div>
-			</div>
-			
-			<div class="bs-component">
-				<table class="table table-striped table-hover ">
-					<thead>
-					<tr>
-						<th>ID:</th>
-						<th>Title</th>
-						<th>Product Category</th>
-						<th>Date Rented</th>
-						<th>Duration</th>
-						<th>Rental Price (per day)</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
-                </tbody>
-              </table> 
-            </div>
+			</div>				
 		</div>
-		<footer>
-			<div class="row">
-			  <div class="col-lg-md">
-				<p align="center">&copy; 2016 COM409 Group 3</p>
-			  </div>
-			</div>
-		</footer> 	  
 	</div>
-	
+		
+	<footer>
+        <div class="row">
+          <div class="col-lg-md">
+            <p align="center">&copy; 2016 COM409 Group 3</p>
+          </div>
+        </div>
+      </footer> 	  
+	</div>
+
     <script src="../jquery/n4.min.js"></script>
     <script src="../jquery/n4_1.min.js"></script>
     

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
-<?php include '../database/db_connect.php'; ?>
+<?php include '../database/db_connect.php';
+
+?>
 
 <html lang="en">
   <head>
@@ -41,9 +43,9 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="customerLogin.html">Customer Login</a></li>
+                <li><a href="customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
-                <li><a href="../Admin/adminLogin.html">Admin Login</a></li>
+                <li><a href="../Admin/AdminLogin.php">Admin Login</a></li>
               </ul>
             </li>
           </ul>
@@ -68,23 +70,22 @@
 			
 				<div class="col-lg-4 col-md-4">
 					<div class="well bs-component">
-						<form class="form-horizontal">
-							<h4>Enter username and password below to login:</h4>
+						<form action="custLoginCheck.php" method="POST" class="form-horizontal">
+							<h4>Enter your email and password below to login:</h4>
 							<fieldset>
 								<div class="form-group">
 									<label for="inputEmail" class="col-lg-2 control-label">Email:</label>
 									<div class="col-lg-10">
-										<input type="text" class="form-control" id="inputEmail" placeholder="Email">
+										<input type="text" class="form-control" name="custEmail" placeholder="Email">
 									</div>
 								</div>
 							  
 								<div class="form-group">
 									<label for="inputPassword" class="col-lg-2 control-label">Password:</label>
 									<div class="col-lg-10">
-										<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+										<input type="password" class="form-control" name="custPassword" placeholder="Password">
 									</div>
 								</div>
-								<a href="rentalHistory.html">Rental Histroy</a>
 								<div class="form-group">
 									<div class="col-lg-10 col-lg-offset-2" align="right">
 										<a href="forgottenpassword.php">Forgot your password?  </a>
@@ -100,7 +101,7 @@
 					<div class="well bs-component">
 						<form action="insertCustDetails.php" method="get" class="form-horizontal">
 							<h4><b>Customer Registration:</b></h4>
-							<p>If you are a new user to N4 Rentals, please register below by entering in a few details… <br>You are one click away to booking your favourite DVD’s <br>Blu-Rays and Games!</p>
+							<p>If you are a new user to N4 Rentals, please register below by entering in a few details… <br>You are just a few clicks away to booking your favourite DVD’s Blu-Rays and Games!</p>
 							<fieldset>
 								<div class="col-lg-6 col-md-6">
 									<div class="form-group">

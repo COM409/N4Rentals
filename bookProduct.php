@@ -5,12 +5,10 @@
 include 'database/db_connect.php'; 
 
 $productID = $_GET['id'];
-$productquery = "SELECT * FROM Products WHERE id=".$productID;
+$productquery = "SELECT * FROM Products WHERE Product_ID=".$productID;
 $result = $conn->query($productquery);
 
 ?>
-
-
 
 <html lang="en">
   <head>
@@ -51,9 +49,9 @@ $result = $conn->query($productquery);
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="Customer/customerLogin.html">Customer Login</a></li>
+                <li><a href="Customer/customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
-                <li><a href="adminLogin.html">Admin Login</a></li>
+                <li><a href="AdminLogin.php">Admin Login</a></li>
               </ul>
             </li>
           </ul>
@@ -77,45 +75,70 @@ $result = $conn->query($productquery);
 			  </div>
 			</div>
 			
-				  <div class="bs-component">
-		<table class="table table-home ">
-			<thead>
-				<tr>
-					<th>Title</th>
-					<th>Description</th>
-					<th>Category</th>
-					<th>Rating</th>
-					<th>Rental Price (per day)</th>
-				</tr>
-			</thead>
-			<tbody>
-			
-			
-			
-			 
-			<tr width="100%">
-				<td width="10%"> <?php echo $row["Title"]; ?> </td>
-                <td width="50%"> <?php echo $row["Description"]; ?> </td>
-				<td width="10%"> <?php echo $row["Category"]; ?> </td>
-				<td width="10%"> <?php echo $row["Rating"]; ?> </td>
-				<td width="20%"> <?php echo "£". $row["Price"]; ?> </td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
-			</tbody>
-			
-			<?php
-			}
-			} else{
-				echo "0 results";
-}
-$conn->close();
-?> 
-		</table> 
-	</div>
-			
+			<div class="row">
+				<div class="col-lg-12 col-md-12">
+				
+					<div class="col-lg-3 col-md-3">
+						<div class="well bs-component">
+							<img src="images/<?php echo $row["Image"]; ?>" style="width:300px;height:250px;">
+							<h1> <b><?php echo $row["Title"]; ?></b></h1>
+						</div>
+					</div>
+					
+					<div class="col-lg-9 col-md-9">
+						<div class="well bs-component">
+							<h2>Description:</h2>
+							<p> <?php echo $row["Description"]; ?> </p>
+						</div>
+					</div>
+					
+					<div class="col-lg-3 col-md-3">
+						<div class="well bs-component">
+							<h3>Category:</h3>
+							<p> <?php echo $row["Category"]; ?> </p>
+						</div>
+					</div>
+						
+					<div class="col-lg-3 col-md-3">
+						<div class="well bs-component">
+							<h3>Rating:</h3>
+							<p> <?php echo $row["Rating"]; ?> </p>
+						</div>
+					</div>
+					
+					<div class="col-lg-3 col-md-3">
+						<div class="well bs-component">
+							<h3>Rental Price Per Day:</h3>
+							<p> <?php echo "£". $row["Price"]; ?> </p>
+						</div>
+					</div>
+					
+					<div class="col-lg-6 col-md-6">
+						<form method="POST" action="confirmBooking.php?id=<?php echo$row['Product_ID']; ?>">
+							<div class="well bs-component">
+								<p>Please enter the amount of days you wish to rent <?php echo $row["Title"]; ?> for:  </p>
+								<div class="col-lg-4 col-md-4">
+									<input type="number" class="form-control size=10px" name="days" placeholder="Days"><br>
+								</div>
+								<div class="col-lg-2 col-md-2">
+									<button type="submit" class="btn btn-primary">Book!</button>
+								</div><br><br>
+							</div>
+						</form>
+					</div>
+				</div>
+					
+					<?php
+						}
+						} else{
+							echo "0 results";}
+							$conn->close();?>
+							
+				</div>
+			</div>
 		</div>
+	</div>
+
 		
 		<footer>
         <div class="row">

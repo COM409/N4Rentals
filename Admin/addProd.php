@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+
+<?php
+session_start();
+
+
+?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -38,8 +45,8 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="adminHome.html">Admin Home</a></li>
-                <li><a href="addProd.html">Add Product</a></li>
+                <li><a href="#" onclick="window.history.back();return false;">Admin Home</a></li>
+                <li><a href="addProd.php">Add Product</a></li>
                 <li><a href="custManage.html">Manage Customers</a></li>
                 <li class="divider"></li>
                 <li><a href="logoutfile.php">Logout</a></li>
@@ -57,7 +64,7 @@
 			<div class="row">
 			  <div class="col-lg-12">
 				<div class="page-header">
-				  <h1 id="forms">Admin: Add a Product:</h1>
+				  <h1 id="forms">Add a Product:</h1>
 				</div>
 			  </div>
 			</div>
@@ -113,7 +120,7 @@
 										<div class="form-group">
 											<label for="inputPrice" class="col-lg-2 control-label">Rental Price:</label>
 											<div class="col-lg-10">
-												<input type="number" class="form-control" name="Price" placeholder="Rental Price">
+												<input type="decimal" class="form-control" name="Price" placeholder="Rental Price">
 											</div>
 										</div>
 										

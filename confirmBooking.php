@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+<?php
+include 'database/db_connect.php';
+$num_of_days = $_GET["days"]; 
+$productID = $_GET['id'];
 
-<?php include 'database/db_connect.php'; 
+$productquery = "SELECT * FROM Products WHERE Product_ID=".$productID;
+$result = $conn->query($productquery);
 
-$sql = "SELECT * FROM Products WHERE Category='Blu_Ray' ORDER BY Product_ID DESC";
-$result = $conn->query($sql);
 
 ?>
 
@@ -48,7 +50,7 @@ $result = $conn->query($sql);
               <ul class="dropdown-menu">
                 <li><a href="Customer/customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
-                <li><a href="Admin/AdminLogin.php">Admin Login</a></li>
+                <li><a href="AdminLogin.php">Admin Login</a></li>
               </ul>
             </li>
           </ul>
@@ -56,64 +58,76 @@ $result = $conn->query($sql);
       </div>
     </div>
 	<br><br><br>
-
-
-    <div class="container">
-
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="page-header">
-					<h1 id="forms"><img src="images/N4_Title.png" width="210" height="35"> Blu-Rays!</h1>
-				</div>
-			</div>
-		</div>
+	
+	<div class="container">
+		<div class="bs-docs-section">
 		
-	  
-	   <div class="bs-component">
-		<table class="table table-home ">
-			<thead>
-				<tr>
-					<th>Title</th>
-					<th>Description</th>
-					<th>Category</th>
-					<th>Rating</th>
-					<th>Rental Price (per day)</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-			
-			<?php
-			
+		<?php
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
-					?>  
-			<tr width="100%">
-				<td width="10%"> <a href="bookProduct.php?id=<?php echo$row['Product_ID']; ?>"> <?php echo $row["Title"]; ?> </a></td>
-                <td width="50%"> <?php echo $row["Description"]; ?> </td>
-				<td width="5%"> <?php echo $row["Category"]; ?> </td>
-				<td width="10%"> <?php echo $row["Rating"]; ?> </td>
-				<td width="20%"> <?php echo "£". $row["Price"]; ?> </td>
-				<td width="5%"> <a href="bookProduct.php?id=<?php echo$row['Product_ID']; ?>"><img src="images/<?php echo $row["Image"]; ?>" alt="<?php echo $row["Title"]; ?>" 
-				style="width:120px;height:130px;"></a> </td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
-			</tbody>
+					?> 		
+			<div class="row">
+			  <div class="col-lg-12 col-md-12">
+			 
+				<div class="page-header">
+				  <h1>Confirmation of booking for <?php echo $row["Title"]; ?>!  </h1>
+				</div>
+			  </div>
+			</div>
 			
+			<div class="row">
+				<div class="col-lg-12 col-md-12">
+					 <div class="col-lg-3 col-md-3">
+						<div class="well bs-component">
+							<img src="images/<?php echo $row["Image"]; ?>" style="width:300px;height:250px;">
+							<h1> <b><?php echo $row["Title"]; ?></b></h1>
+						</div>
+					</div>
+					
+					<div class="col-lg-9 col-md-9">
+						<div class="well bs-component">
+							<p> Congratultions! You have successfully rented <?php echo $row["Title"]; ?> for <?php "$num_of_days" ?> ___ days! </p>
+							<p> Please return your <?php echo $row["Category"]; ?> for <?php "$num_of_days" ?> by the end of your duration by posting or 
+							dropping it back into us on the following address:</p><br>
+							
+							<table>
+								<thead>
+									<tr>
+										<th>Address:</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr width="100%">
+										<td width="20%">N4 Rentals</td>	
+									</tr>
+									<tr width="100%">
+										<td width="20%">3-5 Hill St,</td>
+									</tr>
+									<tr width="100%">
+										<td width="20%">Newry,</td>
+									</tr>
+									<tr width="100%">
+										<td width="20%">Co. Down,</td>
+									</tr>
+									<tr width="100%">
+										<td width="20%">BT34 6GF</td>
+									</tr>
+								</tbody>
+							</table>					
+						</div>					
+					</div>
+				</div>
+			</div>
 			<?php
-			
-			}
-			} else{
-				echo "0 results";
-}
-$conn->close();
-?> 
-		</table> 
+						}
+						} else{
+							echo "0 results";}
+							$conn->close();?>
+		</div>
 	</div>
 
-      <footer>
+		
+		<footer>
         <div class="row">
           <div class="col-lg-md">
             <p align="center">&copy; 2016 COM409 Group 3</p>
@@ -121,8 +135,6 @@ $conn->close();
         </div>
       </footer> 	  
 	</div>
-
-
 
     <script src="jquery/n4.min.js"></script>
     <script src="jquery/n4_1.min.js"></script>

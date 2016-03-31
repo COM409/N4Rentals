@@ -2,7 +2,7 @@
 
 <?php include 'database/db_connect.php'; 
 
-$sql = "SELECT * FROM Products";
+$sql = "SELECT * FROM Products ORDER BY Product_ID DESC";
 $result = $conn->query($sql);
 
 ?>
@@ -46,9 +46,9 @@ $result = $conn->query($sql);
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="Customer/customerLogin.html">Customer Login</a></li>
+                <li><a href="Customer/customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
-                <li><a href="Admin/adminLogin.html">Admin Login</a></li>
+                <li><a href="Admin/AdminLogin.php">Admin Login</a></li>
               </ul>
             </li>
           </ul>
@@ -81,8 +81,8 @@ $result = $conn->query($sql);
           <div class="col-lg-12">
             <div class="bs-component">
               <div class="jumbotron">
-                <h1>SPECIAL OFFERS</h1>
-                <p>Special offer info will be placed in this jumbotron</p>
+                <h1>WELCOME TO N4 Rentals!</h1>
+                <p>Welcome to our new website! Feel free to view our awesome content and don't forget if you haven’t already, to <a href="Customer/customerLogin.php">register!</a></p>
               </div>
             </div>
           </div>
@@ -98,6 +98,7 @@ $result = $conn->query($sql);
 					<th>Category</th>
 					<th>Rating</th>
 					<th>Rental Price (per day)</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -108,11 +109,13 @@ $result = $conn->query($sql);
 				while($row = $result->fetch_assoc()) {
 					?>  
 			<tr width="100%">
-				<td width="10%"> <a href="bookProduct.php?id=<?php echo$row['ID']; ?>"> <?php echo $row["Title"]; ?> </a></td>
+				<td width="10%"> <a href="bookProduct.php?id=<?php echo$row['Product_ID']; ?>"> <?php echo $row["Title"]; ?> </a></td>
                 <td width="50%"> <?php echo $row["Description"]; ?> </td>
-				<td width="10%"> <?php echo $row["Category"]; ?> </td>
+				<td width="5%"> <?php echo $row["Category"]; ?> </td>
 				<td width="10%"> <?php echo $row["Rating"]; ?> </td>
 				<td width="20%"> <?php echo "£". $row["Price"]; ?> </td>
+				<td width="5%"> <a href="bookProduct.php?id=<?php echo$row['Product_ID']; ?>"><img src="images/<?php echo $row["Image"]; ?>" alt="<?php echo $row["Title"]; ?>" 
+				style="width:120px;height:130px;"></a> </td>
 			</tr>
 			<tr>
 				<td></td>

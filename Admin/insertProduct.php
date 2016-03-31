@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include '../database/db_connect.php';
 
@@ -14,7 +15,7 @@ $sql = "INSERT INTO Products(Title,Description,Image,Category,Price,Rating)
 VALUES('$title','$description','$image','$category','$price','$rating')";
 
 if (mysqli_query($conn, $sql)) {
-    header("location: addProd.html");
+    header("location: addProd.php");
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

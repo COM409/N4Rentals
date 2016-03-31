@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php include '../database/db_connect.php'; 
+
+$sql = "SELECT * FROM Customer";
+$result = $conn->query($sql);
+
+?>
+
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -38,11 +45,11 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="adminHome.html">Admin Home</a></li>
-                <li><a href="addProd.html">Add Product</a></li>
+                <li><a href="#" onclick="window.history.back();return false;">Admin Home</a></li>
+                <li><a href="addProd.php">Add Product</a></li>
                 <li><a href="custManage.html">Manage Customers</a></li>
                 <li class="divider"></li>
-                <li><a href="logoutfile.php">Logout</a></li>
+                <li><a href="logoutCust.php">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -53,32 +60,66 @@
 	
 	<div class="container">
 		<div class="bs-docs-section">
-			
+		
 			<div class="row">
-			  <div class="col-lg-12">
-				<div class="page-header">
-				  <h1 id="forms">Admin:	Administration Home</h1>
-				</div>
-			  </div>
+				<div class="col-lg-12">
+					<div class="page-header">
+					  <h1 id="forms">Customer Management</h1>
+					  <p align="justify">You can view all registered users below and remove them if you wish by clicking Remove User.</p>
+					</div>
+				 </div>
 			</div>
 			
-			<div class="row">
-			  <div class="col-lg-12">
-				<div class="page-header">
-				  <p align="justify">As an Admin to N4Rentals, you can perform many administration tasks. Click your desired task below:</p>
-				</div>
-			  </div>
-			</div>
+			<div class="bs-component">
+				<table class="table table-striped table-hover ">
+					<thead>
+					<tr>
+						<th>ID:</th>
+						<th>First name:</th>
+						<th>Last name:</th>
+						<th>DOB:</th>
+						<th>Email:</th>
+						<th>Password:</th>
+						<th>Address:</th>
+						<th>Town:</th>
+						<th>County:</th>
+						<th>Postcode:</th>
+						<th>Country:</th>
+					</tr>
+					
+					<?php
 			
-			<div class="row">
-			  <div class="col-lg-md">
-				<p align="center">Add Product</p>
-				<p align="center">Management Customers</p>
-				<p align="center"><a href="logoutfile.php">Logout</a></p>
-			  </div>
-			</div>
-			
-
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					?>  
+					
+					</thead>
+					<tbody>
+					<tr>
+						<td><?php echo $row["id"]; ?></td>
+						<td><?php echo $row["custFirstName"]; ?></td>
+						<td><?php echo $row["custLastName"]; ?></td>
+						<td><?php echo $row["DOB"]; ?></td>
+						<td><?php echo $row["email"]; ?></td>
+						<td><?php echo $row["pword"]; ?></td>
+						<td><?php echo $row["address"]; ?></td>
+						<td><?php echo $row["town"]; ?></td>
+						<td><?php echo $row["county"]; ?></td>
+						<td><?php echo $row["pcode"]; ?></td>
+						<td><?php echo $row["country"]; ?></td>
+						<td><a href="removeCustomer.php?UserID=<?php echo$row['id']; ?>">Remove User</a></td>
+					</tr>
+					<?php
+			}
+			} else{
+				echo "0 results";
+}
+$conn->close();
+?> 
+					
+                </tbody>
+              </table> 
+            </div>
 		</div>
 		<footer>
 			<div class="row">
@@ -91,8 +132,9 @@
 	
     <script src="../jquery/n4.min.js"></script>
     <script src="../jquery/n4_1.min.js"></script>
-    
-  <script type="text/javascript">
+
+	
+	<script type="text/javascript">
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
 /* ]]> */
