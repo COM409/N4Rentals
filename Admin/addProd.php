@@ -79,7 +79,7 @@ session_start();
 					<p align="center">Enter the details of your a product ensuring to include its category and description as well as rental price. <br>Uploading an image of the product helps too! 
 					Once you submit this form, users will be able to view the product on the site and book!</p>
 						<div class="well bs-component">
-							<form method="GET" action="insertProduct.php" class="form-horizontal">
+							<form method="GET" action="insertProduct.php" name="addProduct" onsubmit="return validateAddProduct()" class="form-horizontal">
 								
 								<fieldset>
 									<div class="col-lg-6 col-md-6">
@@ -109,7 +109,7 @@ session_start();
 											<label for="inputCategory" class="col-lg-2 control-label">Category:</label>
 											<div class="col-lg-10">
 												<select name="Category" class="form-control">
-													<option value="">Category</option>
+													<option value=""> </option>
 													<option value="DVD" name="dvd">DVD</option>
 													<option value="Blu_Ray" name="Blu_Ray">Blu-Ray</option>
 													<option value="Games" name="games">Games</option>
@@ -128,7 +128,7 @@ session_start();
 											<label for="inputRating" class="col-lg-2 control-label">Rating:</label>
 											<div class="col-lg-10">
 												<select name="Rating" class="form-control">
-													<option value="">Viewing Rating</option>
+													<option value=""> </option>
 													<option value="u" name="u">Universal</option>
 													<option value="PG" name="PG">Parental Guidance</option>
 													<option value="12" name="12">12</option>
@@ -164,11 +164,50 @@ session_start();
         </div>
       </footer> 	  
 	</div>
+
+<script>
+function validateAddProduct() {
+	var x = document.forms["addProduct"]["title"].value;
+	if (x == null || x == "") {
+		alert("Please enter a product title!");
+		addProduct.title.focus();
+		return false;
+	}
 	
-    <script src="../jquery/n4.min.js"></script>
-    <script src="../jquery/n4_1.min.js"></script>
-    
-  <script type="text/javascript">
+	var x = document.forms["addProduct"]["description"].value;
+	if (x == null || x == "") {
+		alert("Please enter a product description");
+		addProduct.description.focus();
+		return false;
+	}
+	
+	var x = document.forms["addProduct"]["Category"].value;
+	if (x == null || x == "") {
+		alert("Please select a product category");
+		addProduct.Category.focus();
+		return false;
+	}
+	
+	var x = document.forms["addProduct"]["Price"].value;
+	if (x == null || x == "") {
+		alert("Please enter a rental price for this product!");
+		addProduct.Price.focus();
+		return false;
+	}
+	
+	var x = document.forms["addProduct"]["Rating"].value;
+	if (x == null || x == "") {
+		alert("Please select a product viewing rating!");
+		addProduct.Rating.focus();
+		return false;
+	}
+}
+</script>
+
+<script src="../jquery/n4.min.js"></script>
+<script src="../jquery/n4_1.min.js"></script>
+
+<script type="text/javascript">
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
 /* ]]> */

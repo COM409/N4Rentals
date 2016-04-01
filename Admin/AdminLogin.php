@@ -68,7 +68,7 @@
 					
 					<div class="col-lg-5 col-md-5">
 						<div class="well bs-component">
-							<form action="login_check.php" method="POST" class="form-horizontal">
+							<form action="login_check.php" method="POST" name="adminLogin" onsubmit="return validateAdminLogin()" class="form-horizontal">
 								<h4>Enter your Admin username and password to login:</h4>
 								<fieldset>
 									<div class="form-group">
@@ -108,6 +108,24 @@
         </div>
       </footer> 	  
 	</div>
+	
+<script>
+function validateAdminLogin() {
+	var x = document.forms["adminLogin"]["adminUsername"].value;
+	if (x == null || x == "") {
+		alert("Please enter your admin username to login");
+		return false;
+	}
+	
+	var x = document.forms["adminLogin"]["adminPassword"].value;
+	if (x == null || x == "") {
+		alert("Please enter your admin password to login");
+		return false;
+	}
+}
+</script>
+	
+	
 
     <script src="../jquery/n4.min.js"></script>
     <script src="../jquery/n4_1.min.js"></script>

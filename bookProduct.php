@@ -114,7 +114,7 @@ $result = $conn->query($productquery);
 					</div>
 					
 					<div class="col-lg-6 col-md-6">
-						<form method="POST" action="confirmBooking.php?id=<?php echo$row['Product_ID']; ?>">
+						<form method="POST" action="confirmBooking.php?id=<?php echo$row['Product_ID']; ?>" name="bookProduct" onsubmit="return validateBooking()">
 							<div class="well bs-component">
 								<p>Please enter the amount of days you wish to rent <?php echo $row["Title"]; ?> for:  </p>
 								<div class="col-lg-4 col-md-4">
@@ -149,8 +149,19 @@ $result = $conn->query($productquery);
       </footer> 	  
 	</div>
 
-    <script src="jquery/n4.min.js"></script>
-    <script src="jquery/n4_1.min.js"></script>
+<script>
+function validateBooking() {
+	var x = document.forms["bookProduct"]["days"].value;
+	if (x == null || x == "") {
+		alert("Please enter the duration you wish to rent this product for!");
+		bookProduct.days.focus();
+		return false;
+	}
+}
+</script>
+
+<script src="jquery/n4.min.js"></script>
+<script src="jquery/n4_1.min.js"></script>
     
   <script type="text/javascript">
 /* <![CDATA[ */

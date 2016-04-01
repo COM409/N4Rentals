@@ -113,6 +113,11 @@ $result = $conn->query($adminquery);
 		</footer> 	  
 	</div>
 	
+	
+
+	
+	
+	
     <script src="../jquery/n4.min.js"></script>
     <script src="../jquery/n4_1.min.js"></script>
     
