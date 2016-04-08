@@ -2,6 +2,12 @@
 
 <?php include 'database/db_connect.php'; 
 
+session_start();
+$UserID = $_SESSION['userID'];
+
+$sql = "SELECT * FROM customer WHERE id = ". $UserID;
+$custResult = $conn->query($sql);
+
 $sql = "SELECT * FROM Products WHERE Category='DVD' ORDER BY Product_ID DESC";
 $result = $conn->query($sql);
 
@@ -42,7 +48,33 @@ $result = $conn->query($sql);
               <a href="n4_Games.php">Games</a>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          		  <?php 
+
+if ($UserID){ 
+			if ($custResult->num_rows > 0) {
+				while($row = $custResult->fetch_assoc()) {
+?>
+    <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><?php echo $row['custFirstName'] ." " . $row['custLastName']; ?> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="Customer/custHome.php?id=<?php echo$row['id']; ?>">Customer Home</a></li>
+                <li><a href="Customer/updateCustDetails.php?CustID=<?php echo$row['id']; ?>">Update Contact Information</a></li>
+                <li><a href="Customer/updatePassword.php?CustID=<?php echo$row['id']; ?>">Change Passowrd</a></li>
+                <li class="divider"></li>
+                <li><a href="Customer/logoutCust.php">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+
+<?php
+			}
+			} else{
+				echo "0 results";
+}
+
+ } else { ?>
+    <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -52,6 +84,8 @@ $result = $conn->query($sql);
               </ul>
             </li>
           </ul>
+<?php }
+?>	 
         </div>
       </div>
     </div>

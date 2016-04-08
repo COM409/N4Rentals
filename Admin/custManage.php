@@ -43,13 +43,14 @@ $result = $conn->query($sql);
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Admin <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#" onclick="window.history.back();return false;">Admin Home</a></li>
                 <li><a href="addProd.php">Add Product</a></li>
-                <li><a href="custManage.html">Manage Customers</a></li>
+                <li><a href="prodUpdate.php">Manage Products</a></li>
+                <li><a href="custManage.php">Manage Customers</a></li>
                 <li class="divider"></li>
-                <li><a href="logoutCust.php">Logout</a></li>
+                <li><a href="logoutfile.php">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -107,7 +108,7 @@ $result = $conn->query($sql);
 						<td><?php echo $row["county"]; ?></td>
 						<td><?php echo $row["pcode"]; ?></td>
 						<td><?php echo $row["country"]; ?></td>
-						<td><a href="removeCustomer.php?UserID=<?php echo$row['id']; ?>">Remove User</a></td>
+						<td><input type=button onClick="location.href='removeCustomer.php?UserID=<?php echo$row['id']; ?>'" class="btn btn-danger btn-sm" value='Remove'></td>
 					</tr>
 					<?php
 			}
@@ -133,7 +134,6 @@ $conn->close();
     <script src="../jquery/n4.min.js"></script>
     <script src="../jquery/n4_1.min.js"></script>
 
-	
 	<script type="text/javascript">
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();

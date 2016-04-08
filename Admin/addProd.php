@@ -47,7 +47,8 @@ session_start();
               <ul class="dropdown-menu">
                 <li><a href="#" onclick="window.history.back();return false;">Admin Home</a></li>
                 <li><a href="addProd.php">Add Product</a></li>
-                <li><a href="custManage.html">Manage Customers</a></li>
+                <li><a href="prodUpdate.php">Manage Products</a></li>
+                <li><a href="custManage.php">Manage Customers</a></li>
                 <li class="divider"></li>
                 <li><a href="logoutfile.php">Logout</a></li>
               </ul>
@@ -77,28 +78,28 @@ session_start();
 					
 					<div class="col-lg-8 col-md-8">
 					<p align="center">Enter the details of your a product ensuring to include its category and description as well as rental price. <br>Uploading an image of the product helps too! 
-					Once you submit this form, users will be able to view the product on the site and book!</p>
+					Once you submit this form, users will be able to view the product on the site and book!</p><br><font color="red">Fields marked with a * are required</font>
 						<div class="well bs-component">
 							<form method="GET" action="insertProduct.php" name="addProduct" onsubmit="return validateAddProduct()" class="form-horizontal">
 								
 								<fieldset>
 									<div class="col-lg-6 col-md-6">
 										<div class="form-group">
-											<label for="inputPTitle" class="col-lg-2 control-label">Product Title:</label>
+											<label for="inputPTitle" class="col-lg-2 control-label">Product Title:<font color="red">*</font></label>
 											<div class="col-lg-10">
 												<input type="text" class="form-control" name="title" placeholder="Product Title">
 											</div>
 										</div>
 									  
 										<div class="form-group">
-											<label for="inputDescription" class="col-lg-2 control-label">Description:</label>
+											<label for="inputDescription" class="col-lg-2 control-label">Description:<font color="red">*</font></label>
 											<div class="col-lg-10">
 												<textarea rows="4" cols="50" class="form-control" name="description" placeholder="Description"></textarea>
 											</div>
 										</div>
 										
 										<div class="form-group">
-											<label for="img" class="col-lg-2 control-label">Image:</label>
+											<label for="img" class="col-lg-2 control-label">Image:<font color="red">*</font></label>
 											<div class="col-lg-10">
 												<input type="file" class="form-control" name="image">
 											</div>
@@ -106,7 +107,7 @@ session_start();
 									</div>
 									<div class="col-lg-6 col-md-6">
 										<div class="form-group">
-											<label for="inputCategory" class="col-lg-2 control-label">Category:</label>
+											<label for="inputCategory" class="col-lg-2 control-label">Category:<font color="red">*</font></label>
 											<div class="col-lg-10">
 												<select name="Category" class="form-control">
 													<option value=""> </option>
@@ -118,14 +119,14 @@ session_start();
 										</div>
 										
 										<div class="form-group">
-											<label for="inputPrice" class="col-lg-2 control-label">Rental Price:</label>
+											<label for="inputPrice" class="col-lg-2 control-label">Rental Price:<font color="red">*</font></label>
 											<div class="col-lg-10">
 												<input type="decimal" class="form-control" name="Price" placeholder="Rental Price">
 											</div>
 										</div>
 										
 										<div class="form-group">
-											<label for="inputRating" class="col-lg-2 control-label">Rating:</label>
+											<label for="inputRating" class="col-lg-2 control-label">Rating:<font color="red">*</font></label>
 											<div class="col-lg-10">
 												<select name="Rating" class="form-control">
 													<option value=""> </option>

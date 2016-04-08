@@ -47,7 +47,7 @@ $result = $conn->query($adminquery);
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Admin <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="adminHome.php">Admin Home</a></li>
                 <li><a href="addProd.php">Add Product</a></li>
@@ -82,14 +82,15 @@ $result = $conn->query($adminquery);
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="col-lg-12 col-md-12">
-					<div class="well bs-component">
+					<div class="well bs-component" align="center">
 					<h3><p align="justify">As an Admin to N4Rentals, you can perform administration tasks. Click an option below:</p></h3><br>
-					
-					<h3 align="center"><a href="addProd.php">Add Product</a></h3>
-					<h3 align="center"><a href="prodUpdate.php">Product Management</a></h3>
-					<h3 align="center"><a href="custManage.php">Customer Management</a></h3><br>
-					<h3 align="center"><a href="logoutfile.php">Logout</a></h3>
-
+					<input type=button onClick="location.href='addProd.php'" class="btn btn-primary btn-lg" value='Add Product '>
+					<p class="divider"><p>
+					<input type=button onClick="location.href='prodUpdate.php'" class="btn btn-primary btn-lg" value='Product Management'>
+					<p class="divider"><p>
+					<input type=button onClick="location.href='custManage.php'" class="btn btn-primary btn-lg"value='Customer Management'>
+					<p class="divider"><p>
+					<input type=button onClick="location.href='logoutfile.php'" class="btn btn-danger btn-lg" value='Logout'>
 					</div>
 				</div>
 			</div>

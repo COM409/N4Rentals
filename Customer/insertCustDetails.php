@@ -21,7 +21,7 @@ $sql = "INSERT INTO customer(custFirstName,custLastName,DOB,email,pword,cPword,a
 VALUES('$custFirstName','$custLastName','$DOB','$email','$pword','$cPword','$address','$town','$county','$pcode','$country')";
 
 if (mysqli_query($conn, $sql)) {
-    header("Location: customerLogin.php");	
+    header("Location: customerLogin.php");
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

@@ -43,13 +43,14 @@ $result = $conn->query($sql);
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Admin <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#" onclick="window.history.back();return false;">Admin Home</a></li>
                 <li><a href="addProd.php">Add Product</a></li>
-                <li><a href="custManage.html">Manage Customers</a></li>
+                <li><a href="prodUpdate.php">Manage Products</a></li>
+                <li><a href="custManage.php">Manage Customers</a></li>
                 <li class="divider"></li>
-                <li><a href="logoutCust.php">Logout</a></li>
+                <li><a href="logoutfile.php">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -92,7 +93,7 @@ $result = $conn->query($sql);
 					
 					</thead>
 					<tbody>
-					<form action="prodUpdateProc.php" method="POST">
+					<form action="prodUpdateProc.php?ProductID=<?php echo$row['Product_ID']; ?>" method="POST">
 						<tr width="100%">
 							<td width="10%"><?php echo $row["Product_ID"]; ?></td>
 							<td width="20%"><?php echo $row["Title"]; ?></td>
@@ -103,8 +104,9 @@ $result = $conn->query($sql);
 							<td width="10%"><img src="../images/<?php echo $row["Image"]; ?>" alt="<?php echo $row["Title"]; ?>" 
 							style="width:120px;height:130px;"></td>
 							<td>
-								<a href="prodUpdateProc.php?ProdID=<?php echo$row['Product_ID']; ?>" type="submit">Update!</a><br>
-								<a href="removeProduct.php?ProdID=<?php echo$row['Product_ID']; ?>">Remove</a>
+								<button type="submit" class="btn btn-primary btn-sm">Update</button>
+								<p class="divider"><p>
+								<input type=button onClick="location.href='removeProduct.php?ProdID=<?php echo$row['Product_ID']; ?>'" class="btn btn-danger btn-sm" value='Delete'>
 							</td>
 						</tr>
 					</form>

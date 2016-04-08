@@ -1,33 +1,10 @@
-<?php
-session_start();
-include '../database/db_connect.php';
+<!DOCTYPE html>
 
-$sql = "SELECT * FROM Customer";
-$result = $conn->query($sql);
+<?php include '../database/db_connect.php';
 
-$username = $_POST["custEmail"];
-$password = $_POST["custPassword"];
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-		 $dbUsername=$row["email"];
-		 $dbPassword=$row["pword"];
-		 $CustomerID=$row["id"];
-		 $_SESSION['userID'] = $CustomerID; 
-		 
-		 
-		if ($dbUsername == $username && $dbPassword == $password){
-			$_SESSION['login'];
-			header("Location: CustHome.php?id=$CustomerID ");			 
-		}	 
-	}
-}
-
-
- 
-$conn->close();
 
 ?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -36,7 +13,8 @@ $conn->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="../css/n4Rentals.css" media="screen">
   </head>
- 
+  
+  
   <body>
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -67,51 +45,78 @@ $conn->close();
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="../Customer/customerLogin.php">Customer Login</a></li>
+                <li><a href="Customer/customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
-                <li><a href="AdminLogin.php">Admin Login</a></li>
+                <li><a href="Admin/AdminLogin.php">Admin Login</a></li>
               </ul>
             </li>
           </ul>
         </div>
       </div>
     </div>
-	<br><br><br><br><br><br>
+	<br><br><br>
 	
 	<div class="container">
 		<div class="bs-docs-section">
+				
 			
+						
 			<div class="row">
-			  <div class="col-lg-12">
-				<div class="page-header">
-				  <h1 align="center"> Incorrect Login! Please go <a href="customerLogin.php"><u>back</u></a> and enter correct login details. </h1>
+				<div class="col-lg-12">
+					<div class="page-header">
+					  <h1 id="forms">Reset Password:</h1>
+					</div>
+				 </div>
+			</div>
+				
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+					<div class="well bs-component">
+						<form action="emailCheck.php" method="POST" name="EMAILFORM" onsubmit="return validateEmail()"  class="form-horizontal">
+							<h4><b>Enter your N4 Rentals registered email address below to reset your password:</b></h4>
+							<p><font color="red">Fields marked with a * are required</font></p>
+							<fieldset>			
+									<div class="form-group">
+										<label for="inputFName" class="col-lg-6 col-md-6 control-label">Email:<font color="red">*</font></label>
+										<div class="col-lg-6 col-md-6">
+											<input type="text" class="form-control" name="email" placeholder="Email">
+										</div>
+									</div> 
+									<button type="submit" class="btn btn-primary">Submit</button>
+							</fieldset>
+						</form>
+					</div>
 				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="row">
+			  <div class="col-lg-md">
+				<p align="center">&copy; 2016 COM409 Group 3</p>
 			  </div>
 			</div>
-
-			<div class="row">
-			  <div class="col-lg-12">
-				<div class="page-header">
-				  <h1 align="center">If you've forgotten your username/password please <a href="forgottenpassword.php"></u>click here</u></a>.</h1>
-				</div>
-			  </div>
-			</div>				
-		</div>
-	</div>
-		
-	<footer>
-        <div class="row">
-          <div class="col-lg-md">
-            <p align="center">&copy; 2016 COM409 Group 3</p>
-          </div>
-        </div>
-      </footer> 	  
+		</footer> 	  
 	</div>
 
+<script>
+function validateEmail() {
+	var x = document.forms["EMAILFORM"]["email"].value;
+	if (x == null || x == "") {
+		alert("Please enter your registered email address!");
+		changePass.currentPass.focus();
+		return false;
+	}
+}
+
+</script>
+
+
+	
     <script src="../jquery/n4.min.js"></script>
     <script src="../jquery/n4_1.min.js"></script>
-    
-  <script type="text/javascript">
+
+	
+	<script type="text/javascript">
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
 /* ]]> */

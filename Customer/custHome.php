@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 
 <?php include '../database/db_connect.php';
+
 session_start();
+$_SESSION['userID'];
 
 $CustomerID = $_GET['id'];
 $customerquery = "SELECT * FROM customer WHERE id = ".$CustomerID;
 $result = $conn->query($customerquery);
 
+$rentalquery = "SELECT rental_note.Rental_ID, products.Product_ID, products.Title, products.Category, rental_note.Duration, products.Price, rental_note.Date_Rented 
+FROM rental_note
+INNER JOIN products
+ON rental_note.Product_ID=products.Product_ID 
+WHERE id=".$CustomerID;
+$RentalResult = $conn->query($rentalquery);
+
+
+$_SESSION['userID'] = $CustomerID; 
 
 ?>
 
@@ -53,11 +64,11 @@ $result = $conn->query($customerquery);
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><?php echo $row['custFirstName'] ." " . $row['custLastName']; ?> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="custHome.php?id=<?php echo$row['id']; ?>">Customer Home</a></li>
-                <li><a href="updateCustDetails.php?id=<?php echo$row['id']; ?>">Update Contact Information</a></li>
-                <li><a href="changeCustPassword.php?id=<?php echo$row['id']; ?>">Change Passowrd</a></li>
+                <li><a href="updateCustDetails.php?CustID=<?php echo$row['id']; ?>">Update Contact Information</a></li>
+                <li><a href="updatePassword.php?CustID=<?php echo$row['id']; ?>">Change Passowrd</a></li>
                 <li class="divider"></li>
                 <li><a href="logoutCust.php">Logout</a></li>
               </ul>
@@ -86,15 +97,19 @@ $result = $conn->query($customerquery);
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="col-lg-8 col-md-8">
-					<div class="well bs-component">
+					<div class="well bs-component" align="center">
 					<p>This is your account home page where you can manage your account.<br>
 					View your rental histroy below, your contact details to the right or click an option below to manage your account:</p>
 					
-					<h4 align="center"><a href="updateCustDetails.php?id=<?php echo$row['id']; ?>">Update Contact Information</a></h4>
-					<h4 align="center"><a href="changeCustPassword.php?id=<?php echo$row['id']; ?>">Change Password</a></h4>
-					<h4 align="center"><a href="logoutCust.php">Logout</a></h4>
+					
+					<input type=button onClick="location.href='updateCustDetails.php?CustID=<?php echo$row['id']; ?>'" class="btn btn-primary btn-md" value='Update Contact Information'>
+					<p class="divider"><p>
+					<input type=button onClick="location.href='updatePassword.php?CustID=<?php echo$row['id']; ?>'" class="btn btn-primary btn-md" value='Change Password'>
+					<p class="divider"><p>
+					<input type=button onClick="location.href='logoutCust.php'" class="btn btn-danger btn-md" value='Logout'>
 
 					</div>
+
 				</div>
 				
 				<div class="col-lg-4 col-md-4">
@@ -124,6 +139,11 @@ $result = $conn->query($customerquery);
 				</div>
 			</div>
         </div>
+			<?php
+						}
+						} else{
+							echo "0 results";}
+							?>
 		
 		
 		
@@ -142,68 +162,44 @@ $result = $conn->query($customerquery);
 						<th>ID:</th>
 						<th>Title</th>
 						<th>Product Category</th>
-						<th>Date Rented</th>
-						<th>Duration</th>
-						<th>Rental Price (per day)</th>
+						<th>Duration:</th>
+						<th>Price:(£)</th>
+						<th>Date Rented:</th>
+						<th></th>
 					</tr>
+					
+					<?php
+			
+			if ($RentalResult->num_rows > 0) {
+				while($row = $RentalResult->fetch_assoc()) {
+					?>  
+					
 					</thead>
 					<tbody>
 					<tr>
-						<td>1</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
+						<td><?php echo $row["Rental_ID"]; ?></td>
+						<td><?php echo $row["Title"]; ?></td>
+						<td><?php echo $row["Category"]; ?></td>
+						<td><?php echo $row["Duration"]; ?> days</td>
+						<td><?php echo $row["Price"]; ?></td>
+						<td><?php echo $row["Date_Rented"]; ?></td>
+						<td><a href="../bookProduct.php?id=<?php echo$row['Product_ID']; ?>">Book!</a></td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td>Column content</td>
-						<td><a href="#">Book</a></td>
-					</tr>
+					<?php
+			}
+			} else{
+				echo "You have no rental history yet. After you rent a product it will appear in the table below:<br>";
+}
+$conn->close();
+?> 
+					
                 </tbody>
               </table> 
             </div>
 		
 		
 		
-			<?php
-						}
-						} else{
-							echo "0 results";}
-							$conn->close();?>
+		
 			
 
 		</div>

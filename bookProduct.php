@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 
-<?php
+<?php include 'database/db_connect.php'; 
 
-include 'database/db_connect.php'; 
+session_start();
+$UserID = $_SESSION['userID'];
+
+$sql = "SELECT * FROM customer WHERE id = ". $UserID;
+$custResult = $conn->query($sql);
 
 $productID = $_GET['id'];
 $productquery = "SELECT * FROM Products WHERE Product_ID=".$productID;
@@ -45,16 +49,44 @@ $result = $conn->query($productquery);
               <a href="n4_Games.php">Games</a>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          		  <?php 
+
+if ($UserID){ 
+			if ($custResult->num_rows > 0) {
+				while($row = $custResult->fetch_assoc()) {
+?>
+    <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><?php echo $row['custFirstName'] ." " . $row['custLastName']; ?> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="Customer/custHome.php?id=<?php echo$row['id']; ?>">Customer Home</a></li>
+                <li><a href="Customer/updateCustDetails.php?CustID=<?php echo$row['id']; ?>">Update Contact Information</a></li>
+                <li><a href="Customer/updatePassword.php?CustID=<?php echo$row['id']; ?>">Change Passowrd</a></li>
+                <li class="divider"></li>
+                <li><a href="Customer/logoutCust.php">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+
+<?php
+			}
+			} else{
+				echo "0 results";
+}
+
+ } else { ?>
+    <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="Customer/customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
-                <li><a href="AdminLogin.php">Admin Login</a></li>
+                <li><a href="Admin/AdminLogin.php">Admin Login</a></li>
               </ul>
             </li>
           </ul>
+<?php }
+?>	
         </div>
       </div>
     </div>
@@ -70,7 +102,7 @@ $result = $conn->query($productquery);
 			<div class="row">
 			  <div class="col-lg-12">
 				<div class="page-header">
-				  <h1> Book <u><?php echo $row["Title"]; ?></u> Now! </h1>
+				  <h1> Rent <u><?php echo $row["Title"]; ?></u> Now! </h1>
 				</div>
 			  </div>
 			</div>
@@ -114,11 +146,11 @@ $result = $conn->query($productquery);
 					</div>
 					
 					<div class="col-lg-6 col-md-6">
-						<form method="POST" action="confirmBooking.php?id=<?php echo$row['Product_ID']; ?>" name="bookProduct" onsubmit="return validateBooking()">
+						<form action="Customer/confirmBooking.php?ProductID=<?php echo$row['Product_ID']; ?>"  method="POST" name="bookProduct" onsubmit="return validateBooking()">
 							<div class="well bs-component">
-								<p>Please enter the amount of days you wish to rent <?php echo $row["Title"]; ?> for:  </p>
+								<p>Please enter the amount of days you wish to rent <?php echo $row["Title"]; ?> for:<font color="red">*</font>  </p>
 								<div class="col-lg-4 col-md-4">
-									<input type="number" class="form-control size=10px" name="days" placeholder="Days"><br>
+									<input type="number" class="form-control size=10px" name="duration" placeholder="Days"><br>
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<button type="submit" class="btn btn-primary">Book!</button>
@@ -151,14 +183,16 @@ $result = $conn->query($productquery);
 
 <script>
 function validateBooking() {
-	var x = document.forms["bookProduct"]["days"].value;
+	var x = document.forms["bookProduct"]["duration"].value;
 	if (x == null || x == "") {
 		alert("Please enter the duration you wish to rent this product for!");
-		bookProduct.days.focus();
+		bookProduct.duration.focus();
 		return false;
 	}
 }
+
 </script>
+
 
 <script src="jquery/n4.min.js"></script>
 <script src="jquery/n4_1.min.js"></script>

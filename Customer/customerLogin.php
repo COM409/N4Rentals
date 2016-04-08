@@ -74,14 +74,14 @@
 							<h4>Enter your email and password below to login:</h4>
 							<fieldset>
 								<div class="form-group">
-									<label for="inputEmail" class="col-lg-2 control-label">Email:</label>
+									<label for="inputEmail" class="col-lg-2 control-label">Email:<font color="red">*</font></label>
 									<div class="col-lg-10">
 										<input type="text" class="form-control" name="custEmail" placeholder="Email">
 									</div>
 								</div>
 							  
 								<div class="form-group">
-									<label for="inputPassword" class="col-lg-2 control-label">Password:</label>
+									<label for="inputPassword" class="col-lg-2 control-label">Password:<font color="red">*</font></label>
 									<div class="col-lg-10">
 										<input type="password" class="form-control" name="custPassword" placeholder="Password">
 									</div>
@@ -102,45 +102,46 @@
 						<form action="insertCustDetails.php" method="get" name="custRegistration" onsubmit="return validateRegistration()" class="form-horizontal">
 							<h4><b>Customer Registration:</b></h4>
 							<p>If you are a new user to N4 Rentals, please register below by entering in a few details… <br>You are just a few clicks away to booking your favourite DVD’s Blu-Rays and Games!</p>
+							<p><font color="red">Fields marked with a * are required</font></p>
 							<fieldset>
 								<div class="col-lg-6 col-md-6">
 									<div class="form-group">
-										<label for="inputFName" class="col-lg-2 control-label">Firstname:</label>
+										<label for="inputFName" class="col-lg-2 control-label">Firstname:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="text" class="form-control" name="custFirstName" placeholder="Firstname">
 										</div>
 									</div>
 								  
 									<div class="form-group">
-										<label for="inputLName" class="col-lg-2 control-label">Lastname:</label>
+										<label for="inputLName" class="col-lg-2 control-label">Lastname:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="text" class="form-control" name="custLastName" placeholder="Lastname">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputDOB" class="col-lg-2 control-label">DOB:</label>
+										<label for="inputDOB" class="col-lg-2 control-label">DOB:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="date" class="form-control" name="DOB" placeholder="dd/mm/yyyy">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputEmail" class="col-lg-2 control-label">Email:</label>
+										<label for="inputEmail" class="col-lg-2 control-label">Email:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="email" class="form-control" name="email" placeholder="Email">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputPassword1" class="col-lg-2 control-label">Password:</label>
+										<label for="inputPassword1" class="col-lg-2 control-label">Password:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="password" class="form-control" name="pword" placeholder="Password">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputPassword2" class="col-lg-2 control-label">Confirm password:</label>
+										<label for="inputPassword2" class="col-lg-2 control-label">Confirm password:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="password" class="form-control" name="cPword" placeholder="Re-enter Password">
 										</div>
@@ -148,35 +149,35 @@
 								</div>
 								<div class="col-lg-6 col-md-6">
 									<div class="form-group">
-										<label for="inputAddress" class="col-lg-2 control-label">Address:</label>
+										<label for="inputAddress" class="col-lg-2 control-label">Address:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="text" class="form-control" name="address" placeholder="Address">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputTown" class="col-lg-2 control-label">Town/City:</label>
+										<label for="inputTown" class="col-lg-2 control-label">Town/City:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="text" class="form-control" name="town" placeholder="Town/City">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputCounty" class="col-lg-2 control-label">County:</label>
+										<label for="inputCounty" class="col-lg-2 control-label">County:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="text" class="form-control" name="county" placeholder="County">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputPCode" class="col-lg-2 control-label">Postcode:</label>
+										<label for="inputPCode" class="col-lg-2 control-label">Postcode:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="text" class="form-control" name="pcode" placeholder="Postcode">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputCountry" class="col-lg-2 control-label">Country:</label>
+										<label for="inputCountry" class="col-lg-2 control-label">Country:<font color="red">*</font></label>
 										<div class="col-lg-10">
 											<input type="text" class="form-control" name="country" placeholder="Country">
 										</div>

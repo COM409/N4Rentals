@@ -1,8 +1,9 @@
 <?php include '../database/db_connect.php';
 
 session_start();
+$_SESSION['userID'];
 
-
+$CustomerID = $_GET['CustID'];
 $custFirstName = $_POST["custFirstName"];
 $custLastName = $_POST["custLastName"];
 $address = $_POST["address"];
@@ -12,12 +13,12 @@ $pcode = $_POST["pcode"];
 $country = $_POST["country"];
 
 $sqlUpdateCustomer = "UPDATE customer SET custFirstName='$custFirstName', custLastName='$custLastName', address='$address', town='$town', county='$county', pcode='$pcode', country='$country'
-WHERE $custFirstName = custFirstName";
+WHERE '$CustomerID' = id";
 $result = $conn->query($sqlUpdateCustomer);
 
 
 if (mysqli_query($conn, $sqlUpdateCustomer)) {
-    echo " Success!";
+    header("Location: updateCustDetails.php?CustID=$CustomerID");	
 } else {
     echo "Error: " . $sqlUpdateCustomer . "<br>" . mysqli_error($conn);
 }

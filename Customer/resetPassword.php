@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-
 <?php include '../database/db_connect.php';
+
 session_start();
 $_SESSION['userID'];
 
-$CustomerID = $_GET['CustID'];
+$CustomerID = $_GET['id'];
 $customerquery = "SELECT * FROM customer WHERE id = ".$CustomerID;
 $result = $conn->query($customerquery);
 
@@ -54,13 +54,11 @@ $result = $conn->query($customerquery);
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><?php echo $row['custFirstName'] ." " . $row['custLastName']; ?> <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#" onclick="window.history.back();return false;">Customer Home</a></li>
-                <li><a href="updateCustDetails.php?CustID=<?php echo$row['id']; ?>">Update Contact Information</a></li>
-                <li><a href="updatePassword.php?CustID=<?php echo$row['id']; ?>">Change Passowrd</a></li>
+                <li><a href="Customer/customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
-                <li><a href="logoutCust.php">Logout</a></li>
+                <li><a href="Admin/AdminLogin.php">Admin Login</a></li>
               </ul>
             </li>
           </ul>
@@ -77,7 +75,7 @@ $result = $conn->query($customerquery);
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="page-header">
-					  <h1 id="forms"><?php echo $row["custFirstName"];?> change your contact details here!</h1>
+					  <h1 id="forms"><?php echo $row["custFirstName"];?> change your password here!</h1>
 					</div>
 				 </div>
 			</div>
@@ -85,73 +83,38 @@ $result = $conn->query($customerquery);
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
 					<div class="well bs-component">
-						<form  action="updateCustomerDetails.php?CustID=<?php echo$row['id'];?>"  method="POST" class="form-horizontal">
-							<h4><b>Update Information:</b></h4>
-							<p>You can update your contact address etc. here by changing the details below and clicking Update! 
-							<br><font color="red">Fields marked with a * are required</font></p>
+						<form action="resetPasswordProc.php?CustID=<?php echo$row['id'];?>" method="POST" name="changePass" onsubmit="return validateChangePass()"  class="form-horizontal">
+							<h4><b>Update Password:</b></h4>
+							<p>You can change your password below:</p><p><font color="red">Fields marked with a * are required</font></p>
 							<fieldset>			
 									<div class="form-group">
-										<label for="inputFName" class="col-lg-6 col-md-6 control-label">Firstname:<font color="red">*</font></label>
+										<label for="inputLName" class="col-lg-6 col-md-6 control-label">New Password:<font color="red">*</font></label>
 										<div class="col-lg-6 col-md-6">
-											<input type="text" class="form-control" value="<?php echo $row["custFirstName"]?>" name="custFirstName" placeholder="Firstname">
+											<input type="password" class=" form-control" name="newPass" placeholder="New Password">
 										</div>
 									</div>
-								  
 									<div class="form-group">
-										<label for="inputLName" class="col-lg-6 col-md-6 control-label">Lastname:<font color="red">*</font></label>
+										<label for="inputLName" class="col-lg-6 col-md-6 control-label">Confirm New Password:<font color="red">*</font></label>
 										<div class="col-lg-6 col-md-6">
-											<input type="text" class=" form-control" value="<?php echo $row["custLastName"]?>" name="custLastName" placeholder="Lastname">
+											<input type="password" class=" form-control" name="cNewPass" placeholder="Confirm Password">
 										</div>
 									</div>
-									
-									<div class="form-group">
-										<label for="inputAddress" class="col-lg-6 col-md-6 control-label">Address:<font color="red">*</font></label>
-										<div class="col-lg-6 col-md-6">
-											<input type="text" class="form-control" value="<?php echo $row["address"]?>" name="address" placeholder="Address">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="inputTown" class="col-lg-6 col-md-6 control-label">Town/City:<font color="red">*</font></label>
-										<div class="col-lg-6 col-md-6">
-											<input type="text" class="form-control" value="<?php echo $row["town"]?>" name="town" placeholder="Town/City">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="inputCounty" class="col-lg-6 col-md-6 control-label">County:<font color="red">*</font></label>
-										<div class="col-lg-6 col-md-6">
-											<input type="text" class="form-control" value="<?php echo $row["county"]?>" name="county" placeholder="County">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="inputPCode" class="col-lg-6 col-md-6 control-label">Postcode:<font color="red">*</font></label>
-										<div class="col-lg-6 col-md-6">
-											<input type="text" class="form-control" value="<?php echo $row["pcode"]?>" name="pcode" placeholder="Postcode">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="inputCountry" class="col-lg-6 col-md-6 control-label">Country:<font color="red">*</font></label>
-										<div class="col-lg-6 col-md-6">
-											<input type="text" class="form-control" value="<?php echo $row["country"]?>" name="country" placeholder="Country">
-										</div>
-									</div>
-									
-									<button type="submit" class="btn btn-primary">Update</button>
-								
+									<button type="submit" class="btn btn-primary">Change Password</button>
 							</fieldset>
 						</form>
 					</div>
 				</div>
 			</div>
 			
-				<?php
+			<?php
 							}
 							} else{
 								echo "0 results";}
 								$conn->close();?>
+			
+				
+			
+		
 		</div>
 		<footer>
 			<div class="row">
@@ -161,6 +124,64 @@ $result = $conn->query($customerquery);
 			</div>
 		</footer> 	  
 	</div>
+
+<script>
+function validateChangePass() {
+	var x = document.forms["changePass"]["newPass"].value;
+	if (x == null || x == "") {
+		alert("Please confirm your new password!");
+		changePass.newPass.focus();
+		return false;
+	}
+	
+	var x = document.forms["changePass"]["cNewPass"].value;
+	if (x == null || x == "") {
+		alert("Please confirm your new password!");
+		changePass.cNewPass.focus();
+		return false;
+	}
+	
+	
+	var pass1 = document.forms["changePass"]["newPass"].value;
+	var pass2 = document.forms["changePass"]["cNewPass"].value;
+	if (pass1 != pass2){
+		alert("Passwords do not match! Please enter these are the same");
+		changePass.newPass.focus();
+		return false;
+	}
+
+	
+	if(changePass.newPass.value != "" && changePass.newPass.value == changePass.cNewPass.value) {
+      if(changePass.newPass.value.length < 6) {
+        alert("Password must contain at least six characters!");
+        changePass.newPass.focus();
+        return false;
+      }
+
+      re = /[0-9]/;
+      if(!re.test(changePass.newPass.value)) {
+        alert("Password must contain at least one number (0-9)!");
+        changePass.newPass.focus();
+        return false;
+      }
+      re = /[a-z]/;
+      if(!re.test(changePass.newPass.value)) {
+        alert("Password must contain at least one lowercase letter (a-z)!");
+        changePass.newPass.focus();
+        return false;
+      }
+      re = /[A-Z]/;
+      if(!re.test(changePass.newPass.value)) {
+        alert("Password must contain at least one uppercase letter (A-Z)!");
+        changePass.newPass.focus();
+        return false;
+      }
+    }
+}
+
+</script>
+
+
 	
     <script src="../jquery/n4.min.js"></script>
     <script src="../jquery/n4_1.min.js"></script>
