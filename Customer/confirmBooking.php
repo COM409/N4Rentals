@@ -76,7 +76,7 @@ if ($UserID){
                 <li><a href="updateCustDetails.php?CustID=<?php echo$row['id']; ?>">Update Contact Information</a></li>
                 <li><a href="updatePassword.php?CustID=<?php echo$row['id']; ?>">Change Passowrd</a></li>
                 <li class="divider"></li>
-                <li><a href="Customer/logoutCust.php">Logout</a></li>
+                <li><a href="logoutCust.php">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -116,7 +116,14 @@ if ($UserID){
 			  <div class="col-lg-12 col-md-12">
 			 
 				<div class="page-header">
-				  <h1>Confirmation of booking for <?php echo $row["Title"]; ?>!  </h1>
+				  <div class="col-lg-12 col-md-12">
+					<div class="col-lg-8 col-md-8">
+						<h1>Confirmation of booking for <?php echo $row["Title"]; ?>! </h1>
+					</div>
+					<div class="col-lg-4 col-md-4">
+						<h3>REF: <b>N4Rentals-<?php echo $_SESSION['userID']."-".$row["Category"].  $row["Product_ID"]; ?></b></h3>
+					</div>
+				  </div>
 				</div>
 			  </div>
 			</div>
@@ -132,14 +139,16 @@ if ($UserID){
 					
 					<div class="col-lg-9 col-md-9">
 						<div class="well bs-component" align="center">
-							<h3>Congratulations! You have successfully rented <?php echo $row["Title"]; ?> for <?php echo "$days" ?> days! </h3>
-							<p>Please return your <?php echo $row["Category"]; ?> by the end of the <?php echo "$days" ?> days by posting or 
-							dropping it back into us on the following address:</p><br>
+							<h3>Congratulations! You have successfully rented <?php echo $row["Title"]; ?> for <?php echo "$days" ?> days! </h3><br>
+							<p>Please quote your reference number: <u><b>N4Rentals-<?php echo $_SESSION['userID']."-".$row["Category"].  $row["Product_ID"]; ?></b></u>
+							when you come to collect your <?php echo $row["Category"]; ?> by visiting us at:</p><br>
 							
-							<b>Address:</b>
-							<p>N4 Rentals, 3-5 Hill St, Newry, Co. Down, BT34 6GF.</p>
+							<p><b>N4 Rentals, 3-5 Hill St, Newry, Co. Down, BT34 6GF.</b></p><br>
 							
-							<p>If you have any issues with your <?php echo $row["Category"]; ?> then please contact us via email to: info@N4Rentals.com!</p><br>
+							<p>By the end of the <?php echo "$days" ?> days please return the <?php echo $row["Category"]; ?> by posting or 
+							dropping back to us using the same address as above.</p>
+							
+							<p>If you have any issues with your <?php echo $row["Category"]; ?> then please contact us via email to: info@N4Rentals.com</p><br>
 							<p>Enjoy your viewing!</p>
 
 							<input type=button onClick="location.href='../index.php'" class="btn btn-primary btn-md" value='Continue Browsing'>

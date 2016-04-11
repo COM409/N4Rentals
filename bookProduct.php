@@ -189,6 +189,20 @@ function validateBooking() {
 		bookProduct.duration.focus();
 		return false;
 	}
+		
+	var x = document.forms["bookProduct"]["duration"].value;
+	if (x > 7) {
+		alert("You can only book this product for a maximum of 7 days!");
+		bookProduct.duration.focus();
+		return false;
+	}
+	
+	var x = document.forms["bookProduct"]["duration"].value;
+	if (x <= 0) {
+		alert("You need to book this product for at least 1 day!");
+		bookProduct.duration.focus();
+		return false;
+	}
 }
 
 </script>

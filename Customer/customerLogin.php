@@ -341,6 +341,7 @@ function validateRegistration() {
         custRegistration.pword.focus();
         return false;
       }
+	  alert("You have created a user! You can now login");
     }	
 }	
 </script>
