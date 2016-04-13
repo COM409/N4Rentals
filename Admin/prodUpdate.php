@@ -1,6 +1,9 @@
 <?php include '../database/db_connect.php'; 
 
+//This page will simply pull back all the products from the database and display these on the page. The admin can then go ahead and update or delete the product which will run another script
+
 $sql = "SELECT * FROM Products ORDER BY Product_ID DESC";
+
 $result = $conn->query($sql);
 
 include '../includes/AdminHeader.php';

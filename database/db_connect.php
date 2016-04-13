@@ -1,8 +1,16 @@
 <?php
+//This file is used across all over PHP files as an includes.
+//It makes the connection to the database, if the connection fails it will output an error message instead.
+
 $servername = "localhost";
+
 $username = "COM409";
 $password = "";
 $dbname = "com409";
+
+//$username = "B00656761";
+//$password = "GrkUB7yu";
+//$dbname = "b00656761";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

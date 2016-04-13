@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <?php include '../database/db_connect.php';
 
+//This page will allow the user to enter thier new password after their email has been checked with the database.
+//The user will be able to enter thier new password and then confirm this.
+//Validation is on this form to ensure that both fields are entered and also the password policy from previous is applied here!
+
 session_start();
 $_SESSION['userID'];
 

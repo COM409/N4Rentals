@@ -4,6 +4,11 @@
 session_start();
 $_SESSION['userID'];
 
+//This page will allow a customer already logged in to change thier current contact information. This is an advanced feature added to the site.
+//The user will change thier details in the pre-populated form that holds their current information, to the new information.
+//The form will then submit to another PHP file that will carry out the Update.
+//Validation occurs on this page to ensure all fields are populated.
+
 $CustomerID = $_GET['CustID'];
 $customerquery = "SELECT * FROM customer WHERE id = ".$CustomerID;
 $result = $conn->query($customerquery);

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-
-<?php include '../database/db_connect.php';
-
+<?php 
+//This page is connecting to the database and getting the session ID of the logged in user 
+include '../database/db_connect.php';
 session_start();
 $_SESSION['userID'];
 
+//It's also getting the users information who just logged in.
 $CustomerID = $_GET['id'];
 $customerquery = "SELECT * FROM customer WHERE id = ".$CustomerID;
 $result = $conn->query($customerquery);
 
+//This statement is an SQL Join statement as its selecting from the rental note table and the products table. This is so we can populated the rental histroy information.
 $rentalquery = "SELECT rental_note.Rental_ID, products.Product_ID, products.Title, products.Category, rental_note.Duration, products.Price, rental_note.Date_Rented 
 FROM rental_note
 INNER JOIN products

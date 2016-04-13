@@ -1,6 +1,12 @@
 <?php
 session_start();
 include '../includes/AdminHeader.php';
+
+//This page allows an admin to enter a new product.
+//It contains a form which requires information on a product such as the title, category, rental price etc.
+//There is validation on this form to ensure all required fields are populated before submitting.
+//The form will then submit to another PHP script that will carry out the INSERT of the product. 
+
 ?>
 
 	
@@ -139,6 +145,7 @@ function validateAddProduct() {
 		addProduct.Rating.focus();
 		return false;
 	}
+	alert("Your product has been added!");
 }
 </script>
 

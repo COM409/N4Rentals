@@ -4,6 +4,11 @@
 session_start();
 $_SESSION['userID'];
 
+//This page allows a customer who is already logged in, to change their password. This is an advanced feature to the website.
+//The user will first need to enter their current password and then new password and also confirm this. 
+//Checks are performed in a PHP file that this page submits to, to check if the current password is correct before changing.
+//Validation also is on this page to ensure that all feilds are entered as well as ensuring that the new password adhears to the current password policy.
+
 $CustomerID = $_GET['CustID'];
 $customerquery = "SELECT * FROM customer WHERE id = ".$CustomerID;
 $result = $conn->query($customerquery);

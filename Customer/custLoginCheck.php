@@ -5,6 +5,13 @@ include '../database/db_connect.php';
 $sql = "SELECT * FROM Customer";
 $result = $conn->query($sql);
 
+//This file will check the login of the customer.
+//It will first select all the customer records from the db as seen above.
+//It will then get the email and password value that the user inputs from the previous form.
+//Using the if statement it will then check that if the values inputted are matching a record in the db, then the customer will be loggin in, starting a session 
+//and being re-directed to the customer home page.
+//However if the users details are not matched then these must be incorrect and the user will be redirected to a forgotten password page.
+
 $username = $_POST["custEmail"];
 $password = $_POST["custPassword"];
 
@@ -22,9 +29,6 @@ if ($result->num_rows > 0) {
 		}	 
 	}
 }
-
-
- 
 $conn->close();
 
 ?>

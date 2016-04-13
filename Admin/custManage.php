@@ -1,5 +1,7 @@
 <?php include '../database/db_connect.php'; 
 
+//This page simply pulls back all the customers from the database and displays them.. The admin can then remove a user if they wish by clicking remove which will launch a different script
+
 $sql = "SELECT * FROM Customer";
 $result = $conn->query($sql);
 

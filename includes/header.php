@@ -1,3 +1,5 @@
+<!-- This file holds the header for all files which can then be used as an includes-->
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -34,7 +36,8 @@
             </li>
           </ul>
 		  
-		  <?php 
+		  <?php //This part of the nav-bar is repeated twice as its part of an If statement. It will show a Login link if a user is not logged in (according to the userID)
+				//however if the userID is present on the page like the first clause below, then it will show customer links such as  Logout, Update Passowrd etc..
 
 if ($UserID){ 
 			if ($custResult->num_rows > 0) {

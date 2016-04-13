@@ -1,3 +1,5 @@
+<!--This file simply contains the footer for all pages including linking to jquery and JavaScript files-->
+
       <footer>
         <div class="row">
           <div class="col-lg-md">

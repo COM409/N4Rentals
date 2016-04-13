@@ -1,3 +1,9 @@
+<!--This page will allow the admin to log in-->
+<!--This just contains one simply form that asks for a username and password-->
+<!--It will then submit to a logincheck form which will check if the login details are correct-->
+<!--There is validation on this page to ensure both feilds are populated before submitting-->
+
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -37,7 +43,7 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Login <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="customerLogin.php">Customer Login</a></li>
+                <li><a href="../Customer/customerLogin.php">Customer Login</a></li>
                 <li class="divider"></li>
                 <li><a href="../Admin/AdminLogin.php">Admin Login</a></li>
               </ul>

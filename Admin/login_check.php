@@ -2,6 +2,11 @@
 session_start();
 include '../database/db_connect.php';
 
+//This file simply checks the login of the admin. 
+//It will first select all records from the admin table and then gets the values that the user entered into into the previous admin login form
+//It will perform a check and if that values entered match those in the database it will log the admin in and redirect them to the admin home page
+//However if they do not match it will redirect the user to a forgotten details page.
+
 $sql = "SELECT * FROM admin";
 $result = $conn->query($sql);
 

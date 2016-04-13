@@ -4,6 +4,10 @@ session_start();
 
 include '../database/db_connect.php';
 
+//This page is run when a user clicks submit on the customer registration page.
+//It will first pull all the values in from the registration form and assign them to variables.
+//It will then perform an SQL INSERT into the customer table with each of the variable values to their respected fields in this table.
+
 $custFirstName = $_GET["custFirstName"];
 $custLastName = $_GET["custLastName"];
 $DOB = $_GET["DOB"];

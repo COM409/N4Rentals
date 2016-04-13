@@ -3,6 +3,10 @@
 <?php include '../database/db_connect.php';
 session_start();
 
+//If the admins details are correct then they are redirected to this admin home page.
+//From here they can then click several buttons which will allow them to manage customers, manage products or logout again.
+//An SQL SELECT is carried out here to select the user that is logged in at the moment. It will output the username of the admin on screen.
+
 $AdminID = $_GET['AdminID'];
 $adminquery = "SELECT * FROM admin WHERE id = ".$AdminID;
 $result = $conn->query($adminquery);

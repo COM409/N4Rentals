@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 
 <?php include 'database/db_connect.php'; 
+//The index page is making a connecting to the db using the includes above
 
+//It's then starting the session and taking the session ID which is the customers ID, if the customer lands back to his page while still logged in.
 session_start();
 $UserID = $_SESSION['userID'];
 
+//A SELECT statement is then carried out here to the customer table based on the session ID - this will get the logged in users details.
 $sql = "SELECT * FROM customer WHERE id = ". $UserID;
 $custResult = $conn->query($sql);
 
+//A SELECT statement is also carried out here which selects all products from the Products table and orders them according to the Product_ID descending.
 $sql = "SELECT * FROM Products ORDER BY Product_ID DESC";
 $result = $conn->query($sql);
 
+//An includes file containing the nav-bard, header etc. is used here. This enables the header code just to be wrote once and used across multiple pages.
 include 'includes/header.php'; 
 
 ?>
@@ -62,6 +67,7 @@ include 'includes/header.php';
 			
 			<?php
 			
+			//The product data can be outputted here in the table using the following loop which will continue until all rows in the db are listed.
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
 					?>  

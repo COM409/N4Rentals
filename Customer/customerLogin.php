@@ -2,6 +2,9 @@
 
 <?php include '../database/db_connect.php';
 
+//This file will simply allow a user to either enter details to log in or to register.
+//Depending on which form is submitted it will then re-direct to a different PHP file where the user will be added as a customer or logged in.
+
 ?>
 
 <html lang="en">
@@ -207,6 +210,7 @@
 	</div>
 	
 <script>
+<!--The code below validates the customer login and registration forms. If any field is left blank then it will not submit the form and output an error message-->
 function validateCustLogin() {
 	var x = document.forms["custLogin"]["custEmail"].value;
 	if (x == null || x == "") {
@@ -310,7 +314,9 @@ function validateRegistration() {
 		return false;
 	}
 	
-	
+	<!-- We can also apply the password policy here making sure that the password must have at least 1 uppercase and lowercase value, must have at least-->
+	<!-- one numerical value and must be at least 6 characters. We are using regular expressions to achieve this-->
+	<!-- Again if these are not met then the form will not submit and an error message will appear.-->
 	if(custRegistration.pword.value != "" && custRegistration.pword.value == custRegistration.cPword.value) {
       if(custRegistration.pword.value.length < 6) {
         alert("Password must contain at least six characters!");

@@ -2,6 +2,8 @@
 
 <?php include '../database/db_connect.php';
 
+//If a user has forgotten their password they will be redirected to this page where they are required to first enter their email.
+//When the form is submitted a check will be made on the user to see if it appears in the db and if it is then the user can change their password!
 
 ?>
 

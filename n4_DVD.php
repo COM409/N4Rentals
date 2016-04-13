@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 
-<?php include 'database/db_connect.php'; 
+<?php 
 
+//Again this page is connecting to the database and getting the session ID of the logged in user 
+include 'database/db_connect.php'; 
 session_start();
 $UserID = $_SESSION['userID'];
 
 $sql = "SELECT * FROM customer WHERE id = ". $UserID;
 $custResult = $conn->query($sql);
 
+
+//This product data can be SELECTed here according to the category type.. in his case it is for DVDs
 $sql = "SELECT * FROM Products WHERE Category='DVD' ORDER BY Product_ID DESC";
 $result = $conn->query($sql);
 

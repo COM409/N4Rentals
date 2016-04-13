@@ -1,18 +1,21 @@
 <?php
+//Again this page is connecting to the database and getting the session ID of the logged in user 
 include '../database/db_connect.php';
-
 session_start();
 
 $UserID = $_SESSION['userID'];
 $sql = "SELECT * FROM customer WHERE id = ". $UserID;
 $custResult = $conn->query($sql);
 
+//This page also gets the product details of the product that they've just previously clicked to rent so information can be outtputted here about it!
 $productID = $_GET['ProductID'];
 $productquery = "SELECT * FROM Products WHERE Product_ID=".$productID;
 $result = $conn->query($productquery);
 
+//We then get the duration value also submitted from the previous form
 $days = $_POST["duration"];
 
+//Once we have this information we can now insert it into the Rental_Note table, inserting the Customers ID, the Products ID and the duration.
 if ($_SESSION['userID']){
 	$sql = "INSERT INTO rental_note(id,Product_ID,duration) VALUES('$UserID','$productID','$days')";
 

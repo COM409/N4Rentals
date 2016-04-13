@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 
-<?php include 'database/db_connect.php'; 
+<?php
 
+//Again this page is connecting to the database and getting the session ID of the logged in user 
+include 'database/db_connect.php'; 
 session_start();
 $UserID = $_SESSION['userID'];
 
 $sql = "SELECT * FROM customer WHERE id = ". $UserID;
 $custResult = $conn->query($sql);
 
-$productID = $_GET['id'];
-$productquery = "SELECT * FROM Products WHERE Product_ID=".$productID;
+$productID = $_GET['id'];//This line is getting the product_id from the previous page
+$productquery = "SELECT * FROM Products WHERE Product_ID=".$productID;//A SELECT statement can then pull the product in according to what product the user clicked on the previous page.
 $result = $conn->query($productquery);
 
 ?>
@@ -50,8 +52,8 @@ $result = $conn->query($productquery);
             </li>
           </ul>
           		  <?php 
-
-if ($UserID){ 
+			//The product data can be outputted here using the loop that will carry on until all rows are displayed - in this case it is only one.	  
+			if ($UserID){ 
 			if ($custResult->num_rows > 0) {
 				while($row = $custResult->fetch_assoc()) {
 ?>
